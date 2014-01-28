@@ -1,6 +1,6 @@
 {
   "name": "clever-email",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "q": "",
     "lodash": "2.4.1",
