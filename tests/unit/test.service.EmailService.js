@@ -49,13 +49,13 @@ describe( 'service.EmailService', function () {
             var addr = Service.formatReplyAddress( emailToken );
 
             if ( config.environmentName == 'DEV' ){
-                expect( addr ).to.equal( 'reply_15da5AS15A1s@dev.bolthr.clevertech.biz' );
+                expect( addr ).to.equal( 'reply_15da5AS15A1s@dev.app.cleverstack.io' );
             } else if ( config.environmentName == 'PROD' ) {
-                expect( addr ).to.equal( 'reply_15da5AS15A1s@app-mail.bolthr.com' );
+                expect( addr ).to.equal( 'reply_15da5AS15A1s@app-mail.cleverstack.io' );
             } else if ( config.environmentName == 'STAGE' ) {
-                expect( addr ).to.equal( 'reply_15da5AS15A1s@stage.bolthr.clevertech.biz' );
+                expect( addr ).to.equal( 'reply_15da5AS15A1s@stage.app.cleverstack.io' );
             } else {
-                expect( addr ).to.equal( 'reply_15da5AS15A1s@local.bolthr.clevertech.biz' );
+                expect( addr ).to.equal( 'reply_15da5AS15A1s@local.app.cleverstack.io' );
             }
 
             done();
@@ -105,9 +105,9 @@ describe( 'service.EmailService', function () {
             expect( emailData.email ).to.have.property( 'id' ).and.not.ok;
 
             expect( emailData.email ).to.have.property( 'dump' );
-            
+
             var dump = JSON.parse( emailData.email.dump );
-            
+
             expect( dump ).to.have.property( 'companyLogo' ).and.equal( data.accLogo );
             expect( dump ).to.have.property( 'companyName' ).and.equal( data.accName );
             expect( dump ).to.have.property( 'fromName' ).and.equal( [ data.userFirstName, data.userLastName ].join( ' ' ) );
