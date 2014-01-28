@@ -1,0 +1,38 @@
+{
+  "name": "clever-email",
+  "version": "0.0.1",
+  "dependencies": {
+    "q": "",
+    "lodash": "2.4.1",
+    "mandrill-api": "~1.0.37",
+    "sendgrid": "~0.4.2",
+    "mailgun-js": "~0.3.0",
+    "shortid": "~2.0.0",
+    "sequelize": "1.7.0-beta8"
+  },
+  "author": {
+    "name": "Clevertech",
+    "email": "info@clevertech.biz",
+    "web": "http://www.clevertech.biz"
+  },
+  "main": "module.js",
+  "description": "E-mail system for CleverStack",
+  "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CleverStack/clever-email.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CleverStack/clever-email/issues"
+  },
+  "keywords": [
+    "cleverstack",
+    "cleverstack-module",
+    "cleverstack-modules",
+    "cleverstack-backend"
+  ],
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.17.1"
+  }
+}
