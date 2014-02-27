@@ -31,8 +31,8 @@ module.exports = function ( sequelize,
                         : 'local';
 
             addr = ( envName != 'prod' )
-                ? 'reply_' + emailToken + '@' + envName + '.bolthr.clevertech.biz'
-                : 'reply_' + emailToken + '@app-mail.bolthr.com';
+                ? 'reply_' + emailToken + '@' + envName + '.app.cleverstack.io'
+                : 'reply_' + emailToken + '@app-mail.cleverstack.io';
 
             return addr;
         }, 

@@ -12,6 +12,8 @@ describe( 'service.EmailService', function () {
     var userId, userId_1, userId_2, userId_3, userId_4
       , emailId_1, emailId_1_token, emailId_2;
 
+    this.timeout ( 60000 );
+
     before( function ( done ) {
         testEnv( function ( _EmailService_, _EmailModel_, _UserModel_, _EmailUserModel_ ) {
 
@@ -505,6 +507,7 @@ describe( 'service.EmailService', function () {
 
     } );
 
+    //for run this test you need have a valid api key
     describe.skip( '.sendEmail( email, body, type )', function () {
 
         it( 'should be able to send email', function ( done ) {
@@ -547,6 +550,7 @@ describe( 'service.EmailService', function () {
 
     describe( '.handleEmailSending( userId, emailId, type )', function () {
 
+        //for run this test you need have a valid api key
         it.skip( 'should be able to send email', function ( done ) {
 
             var type = 'html';

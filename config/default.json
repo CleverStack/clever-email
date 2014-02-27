@@ -7,18 +7,18 @@
         "systems": {
             "Mandrill": {
                 "isActive": true,
-                "apiKey":   "anyaWGoRNAFaQQW79MwqAA",
+                "apiKey":   "you api key",
                 "async":    false
             },
             "SendGrid": {
                 "isActive": false,
-                "apiUser" : "",
-                "apiKey" :  ""
+                "apiUser" : "you api user",
+                "apiKey" :  "you api key"
             },
             "MailGun": {
                 "isActive": false,
-                "domain" :  "mytestdomain.com",
-                "apiKey" :  "key-97zzcleh7dgz0kp4jfy1qp0fn38lml73"
+                "domain" :  "you domain",
+                "apiKey" :  "you api key"
             }
         },
 

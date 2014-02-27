@@ -1,14 +1,17 @@
 {
   "name": "clever-email",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
-    "q": "",
+    "q": "1.0.0",
     "lodash": "2.4.1",
-    "mandrill-api": "~1.0.37",
-    "sendgrid": "~0.4.2",
-    "mailgun-js": "~0.3.0",
-    "shortid": "~2.0.0",
-    "sequelize": "1.7.0-beta8"
+    "mandrill-api": "1.0.39",
+    "sendgrid": "1.0.2",
+    "mailgun-js": "0.3.2",
+    "shortid": "2.0.0",
+    "sequelize": "1.7.0-rc9"
+  },
+  "scripts": {
+    "test": "grunt test:unit"
   },
   "author": {
     "name": "Clevertech",
@@ -32,7 +35,11 @@
     "cleverstack-backend"
   ],
   "devDependencies": {
-    "chai": "~1.8.1",
-    "mocha": "~1.17.1"
-  }
+    "chai": "1.9.0",
+    "mocha": "1.17.1"
+  },
+  "bundledDependencies": [
+    "clever-orm",
+    "clever-auth"
+  ]
 }

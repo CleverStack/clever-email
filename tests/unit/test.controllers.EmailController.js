@@ -10,6 +10,8 @@ var userId = 1000, emailId;
 describe( 'controllers.EmailController', function () {
     var ctrl;
 
+    this.timeout ( 60000 );
+
     before( function ( done ) {
         testEnv( function ( EmailController, EmailService ) {
             var req = {
@@ -300,6 +302,7 @@ describe( 'controllers.EmailController', function () {
 
     describe( '.sendAction()', function () {
 
+        //for run this test you need have a valid api key
         it.skip( 'should be able to send email', function ( done ) {
 
             ctrl.send = function ( result, status ) {
