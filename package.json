@@ -8,7 +8,7 @@
     "sendgrid": "1.0.2",
     "mailgun-js": "0.3.2",
     "shortid": "2.0.0",
-    "sequelize": "1.7.0-rc9"
+    "sequelize": "^1.7.0"
   },
   "scripts": {
     "test": "grunt test:unit"
