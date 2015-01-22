@@ -1,45 +1,52 @@
 {
-  "name": "clever-email",
-  "version": "0.0.5",
-  "dependencies": {
-    "q": "1.0.0",
-    "lodash": "2.4.1",
-    "mandrill-api": "1.0.39",
-    "sendgrid": "1.0.2",
-    "mailgun-js": "0.3.2",
-    "shortid": "2.0.0",
-    "sequelize": "^1.7.0"
-  },
-  "scripts": {
-    "test": "grunt test:unit"
-  },
-  "author": {
-    "name": "Clevertech",
-    "email": "info@clevertech.biz",
-    "web": "http://www.clevertech.biz"
-  },
-  "main": "module.js",
-  "description": "E-mail system for CleverStack",
-  "license": "BSD-2-Clause",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/CleverStack/clever-email.git"
-  },
-  "bugs": {
-    "url": "https://github.com/CleverStack/clever-email/issues"
-  },
-  "keywords": [
-    "cleverstack",
-    "cleverstack-module",
-    "cleverstack-modules",
-    "cleverstack-backend"
-  ],
-  "devDependencies": {
-    "chai": "1.9.0",
-    "mocha": "1.17.1"
-  },
-  "bundledDependencies": [
-    "clever-orm",
-    "clever-auth"
-  ]
+    "name":         "clever-email",
+    "description":  "CleverStack Email (Sendgrid, Mandrill and/or MailGun) Module",
+    "version":      "0.9.0",
+    "main":         "module.js",
+    "author": {
+        "name":     "CleverStack",
+        "email":    "admin@cleverstack.io",
+        "web":      "http://cleverstack.io"
+    },
+    "collaborators": [
+        "Richard Gustin <richard.gustin86@gmail.com>"
+    ],
+    "repository": {
+        "type":     "git",
+        "url":      "https://github.com/CleverStack/clever-email.git"
+    },
+    "bugs": {
+        "url":      "https://github.com/CleverStack/clever-email/issues"
+    },
+    "keywords": [
+        "cleverstack",
+        "cleverstack-module",
+        "cleverstack-modules",
+        "cleverstack-backend",
+        "cleverstack email",
+        "sendgrid",
+        "mandrill",
+        "mailgun",
+        "email",
+        "emails"
+    ],
+    "license":      "BSD-2-Clause",
+    "dependencies": {
+        "lodash"        : "2.4.1",
+        "mandrill-api"  : "1.0.39",
+        "sendgrid"      : "1.0.2",
+        "mailgun-js"    : "0.3.2",
+        "shortid"       : "2.0.0"
+    },
+    "devDependencies": {
+        "grunt":        "~0.4.2",
+        "grunt-prompt": "~1.3.0"
+    },
+    "scripts": {
+        "test":     "grunt test:unit"
+    },
+    "bundledDependencies": [
+      "clever-orm",
+      "clever-auth"
+    ]
 }

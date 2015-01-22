@@ -1,53 +1,31 @@
-var Q = require( 'q' )
-  , Sequelize = require( 'sequelize' )
-  , shortid = require( 'shortid' )
-  , config = require( 'config' )
-  , mailer = require( '../lib/mailer' )( config['clever-email'] )
-  , _ = require( 'lodash' )
-  , EmailService = null;
+module.exports = function( Service, EmailModel, EmailAttachmentModel, Sequelize, config, _ ) {
+    var path    = require( 'path' )
+      , mailer  = require( path.resolve( path.join( __dirname, '..', 'lib', 'mailer.js' ) ) )( config[ 'clever-email' ] );
 
-module.exports = function ( sequelize,
-                            ORMEmailModel,
-                            ORMEmailAttachmentModel,
-                            ORMUserModel,
-                            ORMEmailUserModel ) {
+    var EmailService = Service.extend({
 
-    if ( EmailService && EmailService.instance ) {
-        return EmailService.instance;
-    }
+        model: EmailModel,
 
-    EmailService = require( 'services' ).BaseService.extend( {
+        formatReplyAddress  : function ( emailToken ) {
+            var envName = config.environmentName ? config.environmentName.toLowerCase() : 'local'
+              , addr    = 'reply_' + emailToken + '@';
 
-        formatReplyAddress: function ( emailToken ) {
-            var addr = ''
-              , envName = '';
-
-            envName = ( config.environmentName == 'DEV' )
-                ? 'dev'
-                : ( config.environmentName == 'PROD' )
-                    ? 'prod'
-                    : ( config.environmentName == 'STAGE' )
-                        ? 'stage'
-                        : 'local';
-
-            addr = ( envName != 'prod' )
-                ? 'reply_' + emailToken + '@' + envName + '.app.cleverstack.io'
-                : 'reply_' + emailToken + '@app-mail.cleverstack.io';
+            addr += envName != 'prod' ? envName + '.app.cleverstack.io' : 'app-mail.cleverstack.io';
 
             return addr;
         }, 
 
-        formatData: function ( data ) {
+        formatData          : function ( data ) {
             var o = {
-                email: {},
-                usersCC: [],
-                usersBCC: [],
-                attachments: [],
-                sender: {}
+                email       : {},
+                usersCC     : [],
+                usersBCC    : [],
+                attachments : [],
+                sender      : {}
             };
 
             var hasTemplate = (/false|true/.test( data.hasTemplate )) ? data.hasTemplate : true
-              , fullName = data.userFirstName || data.userLastName
+              , fullName    = data.userFirstName || data.userLastName
                     ? [ data.userFirstName, data.userLastName ].join( ' ' )
                     : config['clever-email'].default.fromName;
 
@@ -100,25 +78,25 @@ module.exports = function ( sequelize,
             return o;
         }, 
 
-        listEmails: function ( userId ) {
-            var deferred = Q.defer();
+        listEmails          : function ( userId ) {
+            that.find({
+                where: {
+                    UserId: userId
+                },
+                include: [
+                    { model: EmailAttachmentModel, as: 'attachments' }
+                ]
+            });
+        },
 
-            this
-                .find( { where: { UserId: userId }, include: [ ORMEmailAttachmentModel ] } )
-                .then( deferred.resolve )
-                .fail( deferred.reject );
-
-            return deferred.promise;
-        }, 
-
-        getEmailByIds: function ( userId, emailId ) {
+        getEmailByIds       : function ( userId, emailId ) {
             var deferred = Q.defer()
               , service = this
               , chainer = new Sequelize.Utils.QueryChainer();
 
             chainer.add(
                 ORMEmailModel.find( {
-                    where: { id: emailId, UserId: userId, 'deletedAt': null }, include: [ ORMEmailAttachmentModel ]
+                    where: { id: emailId, UserId: userId, 'deletedAt': null }, include: [ EmailAttachmentModel ]
                 } )
             );
 
@@ -149,7 +127,7 @@ module.exports = function ( sequelize,
             return deferred.promise;
         }, 
 
-        handleEmailCreation: function ( data ) {
+        handleEmailCreation : function ( data ) {
             var deferred = Q.defer()
               , promises = []
               , service = this;
@@ -255,7 +233,7 @@ module.exports = function ( sequelize,
             return deferred.promise;
         }, 
 
-        handleEmailSending: function ( userId, emailId, type ) {
+        handleEmailSending  : function ( userId, emailId, type ) {
             var deferred = Q.defer()
               , service = this;
 
@@ -279,7 +257,7 @@ module.exports = function ( sequelize,
             return deferred.promise;
         }, 
 
-        sendEmail: function ( email, body, type ) {
+        sendEmail           : function ( email, body, type ) {
             var deferred = Q.defer();
 
             email.dump = _.isPlainObject( email.dump )
@@ -293,7 +271,7 @@ module.exports = function ( sequelize,
             return deferred.promise;
         }, 
 
-        deleteEmail: function( userId, emailId ) {
+        deleteEmail         : function( userId, emailId ) {
             var deferred = Q.defer()
               , service = this;
 
@@ -317,13 +295,8 @@ module.exports = function ( sequelize,
                 .fail( deferred.reject );
 
             return deferred.promise;
-
         }
-
-    } );
-
-    EmailService.instance = new EmailService( sequelize );
-    EmailService.Model = ORMEmailModel;
-
-    return EmailService.instance;
+    });
+    
+    return EmailService;
 };
